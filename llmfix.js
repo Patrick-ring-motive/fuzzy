@@ -306,20 +306,20 @@ globalThis.removeRedundant=(passage,delim='.')=> {
 function fixSpacing(txt){
     let words = txt.replaceAll('  ',' ').split(' ');
     for(let i = 0;i<words.length;i++){try{
-        if(!dictionary.check(words[i].replace(/^a-zA-Z/g,''))){
-            if(dictionary.check(`${words[i]}${words[i+1]??''}`.replace(/^a-zA-Z/g,''))){
+        if(!dictionary.check(words[i].replace(/[^a-zA-Z]/g,''))){
+            if(dictionary.check(`${words[i]}${words[i+1]??''}`.replace(/[^a-zA-Z]/g,''))){
                 words[i] = `${words[i]}${words[i+1]??''}`;
                 console.log(words[i]);
                 words[i+1] = '';
                 words = words.join(' ').replaceAll('  ',' ').split(' ');
                 i--;
-            }else if(dictionary.check(`${words[i-1]??''}${words[i]??''}`.replace(/^a-zA-Z/g,''))){
+            }else if(dictionary.check(`${words[i-1]??''}${words[i]??''}`.replace(/[^a-zA-Z]/g,''))){
                 words[i] = `${words[i-1]??''}${words[i]??''}`;
                 console.log(words[i]);
                 words[i-1] = '';
                 words = words.join(' ').replaceAll('  ',' ').split(' ');
                 i--;
-            }else if(dictionary.check(`${words[i-1]??''}${words[i]??''}${words[i+1]??''}`.replace(/^a-zA-Z/g,''))){
+            }else if(dictionary.check(`${words[i-1]??''}${words[i]??''}${words[i+1]??''}`.replace(/[^a-zA-Z]/g,''))){
                 words[i] = `${words[i-1]??''}${words[i]??''}${words[i+1]??''}`;
                 console.log(words[i]);
                 words[i-1] = '';
