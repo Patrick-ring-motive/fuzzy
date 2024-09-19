@@ -72,8 +72,6 @@ const lessErr = function lessErr(str) {
                      .filter(x => x && x?.length)
                      .joinWords();
 }
-const doMatch = function doMatch(str1, str2) {
-  str1 = lessErr(str1);
-  str2 = lessErr(str2);
-  return (lcs(str1, str2) * 0.1) + lcws(str1, str2);
+const phraseMatch = function wordMatch(str1, str2) {
+  return lcws(str1, str2) >= Math.floor(0.8 * Math.max(String(str1).splitWords().length, String(str2).splitWords().length));
 }
